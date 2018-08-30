@@ -8,8 +8,6 @@
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
-
-zplug "felixr/docker-zsh-completion"
 # awesome completion of aws
 # source /usr/local/bin/aws_zsh_completer.sh
 
@@ -33,9 +31,12 @@ set_ssh_agent_socket
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
+# Setting ag as the default source for fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 
-
+# export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -48,6 +49,7 @@ zstyle ':completion:*:*:docker-*:*' option-stacking yes
 zstyle ":completion:*:descriptions" format "%B%d%b"
 zstyle ':completion:*' menu select=2
 
+zstyle ':completion:*' ignored-patterns 'package-lock.json'
 # folder of all of mine personal autocomplete functions
 
 fpath=($HOME/.zsh-completions $fpath)
